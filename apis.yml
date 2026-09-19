@@ -1,0 +1,53 @@
+name: Ozan Soft
+description: >-
+  Independent software company based in Ankara, Türkiye, whose flagship developer product is GenderAPI.io — a REST API
+  for gender detection and name/email/username analysis, phone validation, and demographic data enrichment.
+url: https://raw.githubusercontent.com/api-evangelist/ozan-soft/refs/heads/main/apis.yml
+created: '2026-09-19'
+modified: '2026-09-19'
+specificationVersion: '0.21'
+tags:
+  - data-enrichment
+  - gender-detection
+  - name-analysis
+  - demographics
+  - identity
+  - marketing-data
+  - developer-api
+  - phone-validation
+apis:
+  - name: GenderAPI.io
+    description: >-
+      REST + JSON API that infers gender from first/full names, email addresses, and social usernames, with
+      bulk/multi-country requests, phone validation, and credit/quota endpoints. Supports Bearer token and API-key query
+      authentication.
+    humanURL: https://www.genderapi.io/api-documentation
+    baseURL: https://api.genderapi.io
+    tags:
+      - data-enrichment
+      - gender-detection
+      - name-analysis
+      - demographics
+      - identity
+      - marketing-data
+      - developer-api
+      - phone-validation
+    properties:
+      - type: OpenAPI
+        url: https://www.genderapi.io/openapi/openapi.json
+      - type: OpenAPI
+        url: https://www.genderapi.io/openapi/openapi.yaml
+      - type: PostmanCollection
+        url: https://www.genderapi.io/postman/genderapi.postman_collection.json
+      - type: Documentation
+        url: https://www.genderapi.io/api-documentation
+      - type: Documentation
+        url: https://www.genderapi.io/swagger/
+maintainers:
+  - FN: Ozan Soft
+    url: https://www.genderapi.io/
+generated:
+  by: apis.io/add
+  model: claude-opus-4-8
+  confidence: 98
+  at: '2026-09-19T07:37:41.710Z'
