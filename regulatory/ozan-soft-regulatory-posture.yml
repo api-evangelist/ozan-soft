@@ -1,0 +1,43 @@
+generated: '2026-09-20'
+method: searched
+probe: true
+source: >-
+  https://www.genderapi.io/gdpr-compliance, /ccpa-compliance, /privacy-policy, /subprocessors,
+  /data-provenance, /accuracy-methodology
+note: >-
+  GenderAPI processes personal data (names, emails, usernames, phone numbers) and infers a
+  probabilistic gender attribute, so privacy regimes are the relevant horizontal layer. The provider
+  publishes GDPR and CCPA compliance pages, a privacy policy describing data-subject rights and
+  retention/deletion, and a subprocessor page naming vendors (Google, Cloudflare) with purpose and
+  location. No SBOM, accessibility conformance report, AI-transparency page, DPA, or age-assurance
+  signal was found on public paths — those are honest, individually-probed absences.
+signals:
+  data_subject_request:
+    url: https://www.genderapi.io/gdpr-compliance
+    also:
+      - https://www.genderapi.io/ccpa-compliance
+      - https://www.genderapi.io/privacy-policy
+    evidence:
+      - source: https://www.genderapi.io/gdpr-compliance
+        keywords: [gdpr, data-subject rights, processing categories, retention, deletion]
+      - source: https://www.genderapi.io/ccpa-compliance
+        keywords: [ccpa, california privacy, user rights]
+  subprocessors:
+    url: https://www.genderapi.io/subprocessors
+    evidence:
+      - source: https://www.genderapi.io/subprocessors
+        status: 200
+        keywords: [sub-processor, Google, Cloudflare, purpose, location]
+probed_absent:
+  - signal: sbom
+    paths: [/security/sbom, /security/sbom.json]
+    status: 404
+  - signal: accessibility_conformance
+    paths: [/accessibility, /accessibility/vpat]
+    status: 404
+  - signal: ai_transparency
+    paths: [/ai/transparency, /ai-transparency]
+    status: 404
+  - signal: incident_notification
+    paths: [/legal/dpa, /dpa]
+    status: 404

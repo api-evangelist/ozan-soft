@@ -1,0 +1,110 @@
+generated: '2026-09-20'
+method: searched
+source: https://www.genderapi.io/docs-client-libraries
+note: >-
+  First-party GenderAPI client libraries published under the github.com/GenderAPI organization,
+  in six languages, each with a paired phone-validator library. Versions and dates read from the
+  public registry metadata endpoints on 2026-09-20.
+packages:
+  - language: javascript
+    registry: npm
+    name: genderapi
+    url: https://www.npmjs.com/package/genderapi
+    repo: https://github.com/GenderAPI/genderapi-js
+    install: npm install genderapi
+    official: true
+    version: 1.0.6
+    published: '2025-07-08'
+  - language: python
+    registry: pypi
+    name: genderapi
+    url: https://pypi.org/project/genderapi/
+    repo: https://github.com/GenderAPI/genderapi-python
+    install: pip install genderapi
+    official: true
+    version: 1.1.5
+    published: '2025-07-08'
+  - language: php
+    registry: packagist
+    name: genderapi/genderapi
+    url: https://packagist.org/packages/genderapi/genderapi
+    repo: https://github.com/GenderAPI/genderapi-php
+    install: composer require genderapi/genderapi
+    official: true
+    version: 1.0.3
+    published: '2025-07-08'
+  - language: ruby
+    registry: rubygems
+    name: genderapi
+    url: https://rubygems.org/gems/genderapi
+    repo: https://github.com/GenderAPI/genderapi-ruby
+    install: gem install genderapi
+    official: true
+    version: 1.0.5
+    published: '2025-07-08'
+  - language: r
+    registry: cran
+    name: genderapi
+    url: https://cran.r-project.org/package=genderapi
+    repo: https://github.com/GenderAPI/genderapi-R
+    install: install.packages("genderapi")
+    official: true
+    version: 1.0.3
+    published: '2025-07-14'
+  - language: java
+    registry: jitpack
+    name: com.github.GenderAPI:genderapi-java
+    url: https://jitpack.io/#GenderAPI/genderapi-java
+    repo: https://github.com/GenderAPI/genderapi-java
+    install: "implementation 'com.github.GenderAPI:genderapi-java:v1.0.3'"
+    official: true
+    version: v1.0.3
+    published: null
+    version_note: >-
+      Distributed via JitPack from the GitHub tag rather than a metadata registry with a dated
+      release endpoint; version read from the documented Gradle coordinate.
+  - language: javascript
+    registry: npm
+    name: "@genderapi/phone-validator"
+    url: https://www.npmjs.com/package/@genderapi/phone-validator
+    repo: https://github.com/GenderAPI/phone-validator-js
+    install: npm install @genderapi/phone-validator
+    official: true
+    version: 1.0.9
+    published: '2025-08-03'
+  - language: python
+    registry: pypi
+    name: genderapi-phone-validator
+    url: https://pypi.org/project/genderapi-phone-validator/
+    repo: https://github.com/GenderAPI/phone-validator-python
+    install: pip install genderapi-phone-validator
+    official: true
+    version: 1.0.2
+    published: '2025-08-03'
+  - language: php
+    registry: packagist
+    name: genderapi/phone-validator
+    url: https://packagist.org/packages/genderapi/phone-validator
+    repo: https://github.com/GenderAPI/phone-validator-php
+    install: composer require genderapi/phone-validator
+    official: true
+    version: v1.0.5
+    published: '2025-08-03'
+  - language: ruby
+    registry: rubygems
+    name: genderapi-phone-validator
+    url: https://rubygems.org/gems/genderapi-phone-validator
+    repo: https://github.com/GenderAPI/phone-validator-ruby
+    install: gem install genderapi-phone-validator
+    official: true
+    version: 1.0.3
+    published: '2025-08-03'
+  - language: r
+    registry: github
+    name: PhoneValidator-R
+    url: https://github.com/GenderAPI/PhoneValidator-R
+    repo: https://github.com/GenderAPI/PhoneValidator-R
+    official: true
+    version: null
+    version_note: >-
+      GitHub-only R phone validator; not published to CRAN, so no dated registry release to read.

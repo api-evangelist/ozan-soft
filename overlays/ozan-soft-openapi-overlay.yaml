@@ -1,0 +1,32 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for GenderAPI.io
+  version: 1.0.0
+extends: openapi/ozan-soft-openapi.yml
+x-provenance:
+  generated: '2026-09-20'
+  method: generated
+  source: openapi/ozan-soft-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-09-20'
+      x-apievangelist-provider: ozan-soft
+      x-apievangelist-notes: >-
+        Gender values are probabilistic inferences from name-related evidence, not verified
+        identity. The API returns application-level validation and authentication errors inside
+        HTTP 200 bodies as well as via HTTP status; consumers must branch on the response `status`
+        field and the numeric `errno`, not on HTTP status alone.
+  - target: $.info
+    update:
+      x-apievangelist-agent-surfaces:
+        llms_txt: https://www.genderapi.io/llms.txt
+        agent_skill: https://www.genderapi.io/skill.md
+        apis_json: https://www.genderapi.io/apis.json
+        mcp: none
+        a2a: none
+  - target: $.paths['/api/name/multi/country'].post
+    update:
+      x-apievangelist-note: >-
+        Batch limit is 200 records; email and username batch endpoints cap at 50. Credits are
+        consumed per processed record, not per HTTP request.

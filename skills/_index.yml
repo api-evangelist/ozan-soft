@@ -1,0 +1,20 @@
+generated: '2026-09-20'
+method: searched
+source: https://www.genderapi.io/skill.md
+skills:
+  - file: ozan-soft-integrate-genderapi.md
+    name: integrate-genderapi
+    description: >-
+      Implement, review, or troubleshoot server-side GenderAPI integrations for name, email,
+      username, batch, quota, or phone workflows — provider-published as skill.md.
+    api: openapi/ozan-soft-openapi.yml
+    operations:
+      - inferGenderFromName
+      - inferGenderFromNames
+      - inferGenderFromEmail
+      - inferGenderFromEmails
+      - inferGenderFromUsername
+      - inferGenderFromUsernames
+      - getRemainingQuota
+      - validatePhone
+      - validatePhoneWithQuery

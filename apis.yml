@@ -4,7 +4,7 @@ description: >-
   for gender detection and name/email/username analysis, phone validation, and demographic data enrichment.
 url: https://raw.githubusercontent.com/api-evangelist/ozan-soft/refs/heads/main/apis.yml
 created: '2026-09-19'
-modified: '2026-09-19'
+modified: '2026-09-20'
 specificationVersion: '0.21'
 tags:
   - data-enrichment
@@ -34,14 +34,18 @@ apis:
       - phone-validation
     properties:
       - type: OpenAPI
+        url: openapi/ozan-soft-openapi.yml
+      - type: OpenAPI
+        name: OpenAPI (provider-hosted, JSON)
         url: https://www.genderapi.io/openapi/openapi.json
       - type: OpenAPI
+        name: OpenAPI (provider-hosted, YAML)
         url: https://www.genderapi.io/openapi/openapi.yaml
       - type: PostmanCollection
         url: https://www.genderapi.io/postman/genderapi.postman_collection.json
       - type: Documentation
         url: https://www.genderapi.io/api-documentation
-      - type: Documentation
+      - type: APIReference
         url: https://www.genderapi.io/swagger/
 maintainers:
   - FN: Ozan Soft
@@ -51,3 +55,90 @@ generated:
   model: claude-opus-4-8
   confidence: 98
   at: '2026-09-19T07:37:41.710Z'
+x-enrichment:
+  date: '2026-09-20'
+  status: enriched
+  artifacts_added: 19
+  pass: local-v3
+common:
+- type: DomainSecurity
+  url: security/ozan-soft-domain-security.yml
+- type: Authentication
+  url: authentication/ozan-soft-authentication.yml
+- type: Authentication
+  name: Authentication (docs)
+  url: https://www.genderapi.io/docs-authentication
+- type: LLMsTxt
+  url: llms/ozan-soft-llms.txt
+- type: LLMsTxt
+  name: llms.txt (provider-hosted)
+  url: https://www.genderapi.io/llms.txt
+- type: AgentSkill
+  url: skills/ozan-soft-integrate-genderapi.md
+- type: AgentSkill
+  name: Agent Skill (provider-hosted)
+  url: https://www.genderapi.io/skill.md
+- type: APIsJson
+  name: APIs.json index (provider self-hosted)
+  url: https://www.genderapi.io/apis.json
+- type: APIsJson
+  url: well-known/ozan-soft-apis-json.json
+- type: Packages
+  url: packages/ozan-soft-packages.yml
+- type: SDKs
+  url: packages/ozan-soft-packages.yml
+- type: JavaScript SDK
+  url: https://github.com/GenderAPI/genderapi-js
+- type: Python SDK
+  url: https://github.com/GenderAPI/genderapi-python
+- type: PHP SDK
+  url: https://github.com/GenderAPI/genderapi-php
+- type: Ruby SDK
+  url: https://github.com/GenderAPI/genderapi-ruby
+- type: Java SDK
+  url: https://github.com/GenderAPI/genderapi-java
+- type: OpenAPIOverlay
+  url: overlays/ozan-soft-openapi-overlay.yaml
+- type: Conformance
+  url: conformance/ozan-soft-conformance.yml
+- type: Compliance
+  name: GDPR compliance
+  url: https://www.genderapi.io/gdpr-compliance
+- type: ErrorCatalog
+  url: errors/ozan-soft-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/ozan-soft-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/ozan-soft-lifecycle.yml
+- type: Conventions
+  url: conventions/ozan-soft-conventions.yml
+- type: DataModel
+  url: data-model/ozan-soft-data-model.yml
+- type: Plans
+  url: plans/ozan-soft-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/ozan-soft-rate-limits.yml
+- type: DataSubjectRequest
+  url: https://www.genderapi.io/gdpr-compliance
+- type: Subprocessors
+  url: https://www.genderapi.io/subprocessors
+- type: Website
+  url: https://www.genderapi.io/
+- type: DeveloperPortal
+  url: https://www.genderapi.io/api-documentation
+- type: Pricing
+  url: https://www.genderapi.io/price
+- type: SignUp
+  url: https://app.genderapi.io/user/register
+- type: Login
+  url: https://app.genderapi.io/
+- type: TermsOfService
+  url: https://www.genderapi.io/terms
+- type: PrivacyPolicy
+  url: https://www.genderapi.io/privacy-policy
+- type: Support
+  url: https://www.genderapi.io/contact
+- type: Blog
+  url: https://www.genderapi.io/blog
+- type: GitHubOrganization
+  url: https://github.com/GenderAPI

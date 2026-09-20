@@ -1,0 +1,34 @@
+generated: '2026-09-20'
+method: derived
+source: openapi/ozan-soft-openapi.yml (info.x-lifecycle-policy) + https://www.genderapi.io/terms
+note: >-
+  GenderAPI does not publish a dedicated deprecation-policy page or a status page. It DOES embed a
+  formal lifecycle/deprecation policy in its OpenAPI contract (info.x-lifecycle-policy), captured
+  below. No status.genderapi.io or status page was found.
+versioning:
+  scheme: uri-path
+  current: v2
+  note: >-
+    apis.json declares the REST API version "2"; the OpenAPI document is versioned 1.0.0.
+    Endpoints are unversioned in the path (/api, /api/email, ...).
+deprecation:
+  policy_embedded_in_contract: true
+  source: openapi/ozan-soft-openapi.yml#/info/x-lifecycle-policy
+  approved_at: '2026-09-15'
+  minimum_notice_months: 6
+  critical_enterprise_notice_months: 12
+  notice_channels:
+    - developer documentation
+    - account email
+  sunset_signaling:
+    - documentation deprecation notice
+    - Sunset HTTP header where technically applicable
+  sunset_header: true
+  breaking_change_definition: >-
+    Removing or changing an accepted request transport, operation, response shape, field type,
+    HTTP/application-error mapping, or errno value is a breaking change.
+  compatibility: >-
+    Existing legacy GET, authentication transports, JSONP or alternate response shapes, HTTP error
+    mappings, and errno values remain operational until measured, announced, and migrated.
+status_page: null
+deprecated_operations: []

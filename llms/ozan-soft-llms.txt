@@ -1,0 +1,91 @@
+# GenderAPI
+
+> GenderAPI provides name-, email-, and username-based gender inference, country-aware results, bulk workflows, and developer documentation.
+
+Use the API documentation for current request formats and error behavior.
+
+Gender results are probabilistic inferences from name-related evidence, not verified statements of a person's identity. Preserve unknown and low-confidence outcomes.
+
+## Start Here
+
+- [GenderAPI homepage](https://www.genderapi.io/): Product overview, supported input types, interactive example, and links to developer resources.
+- [API documentation](https://www.genderapi.io/api-documentation): Entry point for authentication, endpoints, client libraries, errors, and usage guidance.
+- [Extended AI agent guide](https://www.genderapi.io/llms-full.txt): Controlled implementation, safety, privacy, error-handling, integration, and source-priority guidance.
+- [GenderAPI integration skill](https://www.genderapi.io/skill.md): Procedural instructions for coding agents implementing safe server-side GenderAPI integrations.
+- [OpenAPI 3.1 JSON](https://www.genderapi.io/openapi/openapi.json): Machine-readable draft contract in JSON; API-owner review is required before production reliance.
+- [OpenAPI 3.1 YAML](https://www.genderapi.io/openapi/openapi.yaml): Machine-readable draft contract in YAML; semantically equivalent to the JSON representation.
+- [Swagger reference](https://www.genderapi.io/swagger/): Human-readable OpenAPI reference with request submission disabled while the contract remains a draft.
+- [Postman collection](https://www.genderapi.io/postman/genderapi.postman_collection.json): Deterministic request collection generated from the same local OpenAPI draft.
+- [Postman environment template](https://www.genderapi.io/postman/genderapi.postman_environment.json): Importable environment using only base URL and a non-functional API-key placeholder.
+- [Authentication](https://www.genderapi.io/docs-authentication): How to authenticate requests and protect an API key.
+- [Client libraries](https://www.genderapi.io/docs-client-libraries): Available client and implementation options.
+
+## Core API Reference
+
+- [Gender from one name](https://www.genderapi.io/docs-gender-from-name-single): Single first-name or full-name request fields and response example.
+- [Gender from multiple names](https://www.genderapi.io/docs-gender-from-name-multiple): Batch name request and per-record result behavior.
+- [Gender from one email](https://www.genderapi.io/docs-gender-from-email-single): Single email request, name extraction behavior, and response.
+- [Gender from multiple emails](https://www.genderapi.io/docs-gender-from-email-multiple): Batch email lookup request and response guidance.
+- [Gender from one username](https://www.genderapi.io/docs-gender-from-username-single): Single username request and inference behavior.
+- [Gender from multiple usernames](https://www.genderapi.io/docs-gender-from-username-multiple): Batch username lookup request and response guidance.
+- [Error codes](https://www.genderapi.io/docs-error-codes): API errors, likely causes, and recovery guidance.
+- [Usage and quota](https://www.genderapi.io/docs-usage-and-quota): How request usage and remaining quota are represented.
+- [Phone validation and formatting](https://www.genderapi.io/docs-phone-validation-formatter-api): Phone validation and formatting API reference.
+
+## Capabilities and Limitations
+
+- [Accuracy methodology](https://www.genderapi.io/accuracy-methodology): How evaluation scope, uncertainty, thresholds, country context, and representative testing should be interpreted.
+- [Data provenance](https://www.genderapi.io/data-provenance): High-level account of source categories, normalization, aggregation, quality controls, and provenance limitations.
+- [Email to gender](https://www.genderapi.io/determine-gender-from-email): Interactive email workflow, extraction behavior, and cases without a usable name signal.
+- [Username to gender](https://www.genderapi.io/determine-gender-from-username): Interactive username workflow and limitations for abstract or brand-like handles.
+- [Arabic names](https://www.genderapi.io/determine-gender-from-arabic-names): Arabic-script name workflow, country context, and interpretation guidance.
+- [Chinese names](https://www.genderapi.io/determine-gender-from-chinese-names): Chinese-name workflow and guidance for regional context and uncertainty.
+- [Indian names](https://www.genderapi.io/determine-gender-from-indian-names): Indian-name workflow with script, regional context, and uncertainty guidance.
+- [Japanese names](https://www.genderapi.io/determine-gender-from-japanese-names): Japanese-name workflow and guidance for script, reading, and uncertainty.
+- [Frequently asked questions](https://www.genderapi.io/frequently-asked-questions): Result interpretation, API behavior, privacy, billing, and account answers.
+
+## Integrations and Bulk Workflows
+
+- [Integrations overview](https://www.genderapi.io/integrations): Developer, spreadsheet, ecommerce, and automation integration options.
+- [Excel and CSV processing](https://www.genderapi.io/blog/determining-gender-of-names-in-excel-csv-with-gender-api): File preparation, upload workflow, output fields, and operational limitations.
+- [Microsoft Excel formula](https://www.genderapi.io/blog/gender-formula-for-microsoft-excel): Use the GenderAPI Excel formula for worksheet enrichment.
+- [Google Sheets formula](https://www.genderapi.io/blog/gender-formula-google-sheets-detect-gender-from-names): Use a GenderAPI formula inside Google Sheets.
+- [Google Sheets add-on](https://www.genderapi.io/blog/how-to-determine-gender-in-google-sheets-using-gender-api-add-on): Install, configure, and use the Google Sheets add-on.
+- [Shopify workflow](https://www.genderapi.io/blog/how-to-determine-gender-in-shop-ify-using-gender-api): Gender enrichment workflow for Shopify customer records.
+- [Airtable workflow](https://www.genderapi.io/blog/how-to-determine-gender-from-airtable-data): Gender enrichment workflow for Airtable records.
+- [Zapier integration](https://www.genderapi.io/blog/zapier-gender-api-integration): Connect GenderAPI to an automated Zapier workflow.
+- [Make integration](https://www.genderapi.io/blog/make-gender-api-integration): Connect GenderAPI to a Make automation scenario.
+- [Pipedream integration](https://www.genderapi.io/blog/pipedream-gender-api-integration): Connect GenderAPI to a Pipedream workflow.
+
+## Privacy, Compliance, and Company
+
+- [Privacy policy](https://www.genderapi.io/privacy-policy): Published processing, storage, retention, deletion, and user-rights information.
+- [GDPR compliance](https://www.genderapi.io/gdpr-compliance): GDPR roles, processing categories, safeguards, and data-subject information.
+- [CCPA compliance](https://www.genderapi.io/ccpa-compliance): California privacy disclosures and user-rights information.
+- [Terms of service](https://www.genderapi.io/terms): Contract, account, service, payment, acceptable-use, and retention terms.
+- [Delivery and returns](https://www.genderapi.io/delivery-returns): Digital delivery and the published refund process.
+- [About GenderAPI](https://www.genderapi.io/about-us): Company identity, product purpose, and operating principles.
+- [Trademark and brand information](https://www.genderapi.io/trademark): Official brand ownership information and registry references.
+- [Contact GenderAPI](https://www.genderapi.io/contact): Official support and company contact channels.
+
+## Commercial
+
+- [Pricing](https://www.genderapi.io/price): Current plans, payment models, and purchase guidance; use this page for current commercial details.
+
+## Markdown API Reference
+
+- [API documentation in Markdown](https://www.genderapi.io/api-documentation.md): Clean endpoint index and implementation rules derived from the OpenAPI draft.
+- [Authentication in Markdown](https://www.genderapi.io/docs-authentication.md): Clean server-side authentication and credential-safety reference.
+- [Single name endpoint in Markdown](https://www.genderapi.io/docs-gender-from-name-single.md): Contract-derived request fields, response fields, examples, and error links.
+- [Multiple names endpoint in Markdown](https://www.genderapi.io/docs-gender-from-name-multiple.md): Contract-derived batch-name request, limits, response example, and usage guidance.
+- [Single email endpoint in Markdown](https://www.genderapi.io/docs-gender-from-email-single.md): Contract-derived email request, extracted-name response, and uncertainty guidance.
+- [Multiple emails endpoint in Markdown](https://www.genderapi.io/docs-gender-from-email-multiple.md): Contract-derived batch-email request, response example, and record correlation guidance.
+- [Single username endpoint in Markdown](https://www.genderapi.io/docs-gender-from-username-single.md): Contract-derived username request, AI options, response, and uncertainty guidance.
+- [Multiple usernames endpoint in Markdown](https://www.genderapi.io/docs-gender-from-username-multiple.md): Contract-derived batch-username request, limits, response, and usage guidance.
+- [Error codes in Markdown](https://www.genderapi.io/docs-error-codes.md): Stable errno catalog and corrective handling rules derived from the API contract.
+- [Usage and quota in Markdown](https://www.genderapi.io/docs-usage-and-quota.md): Server-side quota request and response fields derived from the API contract.
+
+## Optional
+
+- [GenderAPI blog](https://www.genderapi.io/blog): Product, implementation, spreadsheet, ecommerce, and automation articles.
+- [Content RSS](https://www.genderapi.io/rss.xml): Recent GenderAPI editorial updates in RSS format.

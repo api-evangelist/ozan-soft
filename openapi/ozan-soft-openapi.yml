@@ -1,0 +1,767 @@
+openapi: 3.1.0
+info:
+  title: GenderAPI Public API
+  version: 1.0.0
+  summary: Gender inference and phone validation endpoints.
+  description: API-owner-approved contract derived from the public English documentation and verified backend handlers.
+    Gender values are probabilistic inferences, not verified identity. Publication remains controlled by the separate
+    GEO release gate.
+  termsOfService: https://www.genderapi.io/terms
+  contact:
+    url: https://www.genderapi.io/contact
+x-lifecycle-policy:
+  approvedAt: 2026-09-15
+  canonicalTransport: Bearer authentication on POST operations; query-key on documented GET compatibility operations.
+  compatibility: Existing legacy GET, authentication transports, JSONP or alternate response shapes, HTTP error mappings,
+    and errno values remain operational until measured, announced, and migrated.
+  breakingChange: Removing or changing an accepted request transport, operation, response shape, field type,
+    HTTP/application-error mapping, or errno value is a breaking change.
+  minimumNoticeMonths: 6
+  criticalEnterpriseNoticeMonths: 12
+  noticeChannels:
+    - developer documentation
+    - account email
+  sunsetSignaling:
+    - documentation deprecation notice
+    - Sunset HTTP header where technically applicable
+servers:
+  - url: https://api.genderapi.io
+    description: Production API
+tags:
+  - name: Gender inference
+  - name: Phone
+  - name: Quota
+paths:
+  /api:
+    post:
+      tags:
+        - Gender inference
+      operationId: inferGenderFromName
+      summary: Infer gender from one name
+      description: "Canonical documentation: https://www.genderapi.io/docs-gender-from-name-single"
+      security:
+        - bearerAuth: []
+      x-documentation-url: https://www.genderapi.io/docs-gender-from-name-single
+      x-credit-cost: One lookup; AI fallback may have different usage accounting. Confirm current terms.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                country: &a3
+                  type: string
+                  pattern: ^[A-Z]{2}$
+                  description: ISO 3166-1 alpha-2 country code used as regional context.
+                  examples:
+                    - US
+                askToAI:
+                  type: boolean
+                  default: false
+            example:
+              name: Alice
+              country: US
+              askToAI: true
+      responses:
+        "200":
+          description: Application response. Inspect status before reading result fields; live verification observed validation
+            and authentication errors inside HTTP 200 responses.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/SingleLookupResponse"
+                  - $ref: "#/components/schemas/Error"
+              example:
+                status: true
+                used_credits: 1
+                remaining_credits: 4999
+                expires: 1743659200
+                q: Alice
+                name: Alice
+                gender: female
+                country: US
+                total_names: 10234
+                probability: 98
+                duration: 4ms
+        "400": &a1
+          description: Request rejected. Branch on errno rather than errmsg text.
+          content: &a2
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401": *a1
+        "403": *a1
+        "404": &a4
+          description: Authentication rejected by a gender-inference handler. Current backend compatibility behavior uses HTTP 404
+            with an Error body for this branch.
+          content: *a2
+        "429": *a1
+  /api/name/multi/country:
+    post:
+      tags:
+        - Gender inference
+      operationId: inferGenderFromNames
+      summary: Infer gender from multiple names
+      description: "Canonical documentation: https://www.genderapi.io/docs-gender-from-name-multiple"
+      security:
+        - bearerAuth: []
+      x-documentation-url: https://www.genderapi.io/docs-gender-from-name-multiple
+      x-credit-cost: Credits are consumed per processed record, not per HTTP request.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - data
+              properties:
+                data:
+                  type: array
+                  minItems: 1
+                  maxItems: 200
+                  items:
+                    type: object
+                    additionalProperties: false
+                    required:
+                      - name
+                    properties:
+                      name:
+                        type: string
+                        minLength: 1
+                      country: *a3
+                      id: &a5
+                        oneOf:
+                          - type: string
+                          - type: integer
+                        description: Caller record identifier.
+            example:
+              data:
+                - name: Andrea
+                  country: DE
+                  id: "123"
+      responses:
+        "200":
+          description: Application response. Inspect status before reading result fields; live verification observed validation
+            and authentication errors inside HTTP 200 responses.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/BatchLookupResponse"
+                  - $ref: "#/components/schemas/Error"
+              example:
+                status: true
+                used_credits: 1
+                remaining_credits: 4999
+                expires: 1743659200
+                names:
+                  - q: Andrea
+                    name: andrea
+                    gender: female
+                    country: US
+                    total_names: 1234
+                    probability: 92
+                    id: "123"
+                duration: 5ms
+        "400": *a1
+        "401": *a1
+        "403": *a1
+        "404": *a4
+        "429": *a1
+      x-live-verification:
+        observedAt: 2026-09-14
+        result: A 200-record request returned all 200 results with used_credits 200. A 201-record request returned HTTP 200 with
+          status false and errno 92.
+        partialProcessing: A mixed request containing one valid record and one record without the required name returned status
+          true, one result, and used_credits 1. An empty-string name was processed and returned gender "null".
+  /api/email:
+    post:
+      tags:
+        - Gender inference
+      operationId: inferGenderFromEmail
+      summary: Extract a name and infer gender from one email address
+      description: "Canonical documentation: https://www.genderapi.io/docs-gender-from-email-single"
+      security:
+        - bearerAuth: []
+      x-documentation-url: https://www.genderapi.io/docs-gender-from-email-single
+      x-credit-cost: One lookup; AI fallback may have different usage accounting. Confirm current terms.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - email
+              properties:
+                email:
+                  type: string
+                  minLength: 1
+                country: *a3
+                askToAI:
+                  type: boolean
+                  default: false
+            example:
+              email: alice.smith@example.com
+              country: US
+      responses:
+        "200":
+          description: Application response. Inspect status before reading result fields; live verification observed validation
+            and authentication errors inside HTTP 200 responses.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/SingleLookupResponse"
+                  - $ref: "#/components/schemas/Error"
+              example:
+                status: true
+                used_credits: 1
+                remaining_credits: 4999
+                expires: 1743659200
+                q: alice.smith@example.com
+                name: Alice
+                gender: female
+                country: US
+                total_names: 10234
+                probability: 98
+                duration: 4ms
+        "400": *a1
+        "401": *a1
+        "403": *a1
+        "404": *a4
+        "429": *a1
+  /api/email/multi/country:
+    post:
+      tags:
+        - Gender inference
+      operationId: inferGenderFromEmails
+      summary: Extract names and infer gender from multiple email addresses
+      description: "Canonical documentation: https://www.genderapi.io/docs-gender-from-email-multiple"
+      security:
+        - bearerAuth: []
+      x-documentation-url: https://www.genderapi.io/docs-gender-from-email-multiple
+      x-credit-cost: Credits are consumed per processed record, not per HTTP request.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - data
+              properties:
+                data:
+                  type: array
+                  minItems: 1
+                  maxItems: 50
+                  items:
+                    type: object
+                    additionalProperties: false
+                    required:
+                      - email
+                    properties:
+                      email:
+                        type: string
+                        minLength: 1
+                      country: *a3
+                      id: *a5
+            example:
+              data:
+                - email: anna.smith@example.com
+                  country: US
+                  id: "123"
+      responses:
+        "200":
+          description: Application response. Inspect status before reading result fields; live verification observed validation
+            and authentication errors inside HTTP 200 responses.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/BatchLookupResponse"
+                  - $ref: "#/components/schemas/Error"
+              example:
+                status: true
+                used_credits: 1
+                remaining_credits: 4999
+                expires: 1743659200
+                names:
+                  - q: anna.smith@example.com
+                    name: Anna
+                    gender: female
+                    country: US
+                    total_names: 1234
+                    probability: 92
+                    id: "123"
+                duration: 5ms
+        "400": *a1
+        "401": *a1
+        "403": *a1
+        "404": *a4
+        "429": *a1
+  /api/username:
+    post:
+      tags:
+        - Gender inference
+      operationId: inferGenderFromUsername
+      summary: Extract a name and infer gender from one username
+      description: "Canonical documentation: https://www.genderapi.io/docs-gender-from-username-single"
+      security:
+        - bearerAuth: []
+      x-documentation-url: https://www.genderapi.io/docs-gender-from-username-single
+      x-credit-cost: One lookup; AI options may have different usage accounting. Confirm current terms.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - username
+              properties:
+                username:
+                  type: string
+                  minLength: 1
+                country: *a3
+                askToAI:
+                  type: boolean
+                  default: false
+                forceToGenderize:
+                  type: boolean
+                  default: false
+            example:
+              username: anna_smith88
+              country: US
+      responses:
+        "200":
+          description: Application response. Inspect status before reading result fields; live verification observed validation
+            and authentication errors inside HTTP 200 responses.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/SingleLookupResponse"
+                  - $ref: "#/components/schemas/Error"
+              example:
+                status: true
+                used_credits: 1
+                remaining_credits: 4999
+                expires: 1743659200
+                q: anna_smith88
+                name: Anna
+                gender: female
+                country: US
+                total_names: 10234
+                probability: 98
+                duration: 4ms
+        "400": *a1
+        "401": *a1
+        "403": *a1
+        "404": *a4
+        "429": *a1
+  /api/username/multi/country:
+    post:
+      tags:
+        - Gender inference
+      operationId: inferGenderFromUsernames
+      summary: Extract names and infer gender from multiple usernames
+      description: "Canonical documentation: https://www.genderapi.io/docs-gender-from-username-multiple"
+      security:
+        - bearerAuth: []
+      x-documentation-url: https://www.genderapi.io/docs-gender-from-username-multiple
+      x-credit-cost: Credits are consumed per processed record, not per HTTP request.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - data
+              properties:
+                data:
+                  type: array
+                  minItems: 1
+                  maxItems: 50
+                  items:
+                    type: object
+                    additionalProperties: false
+                    required:
+                      - username
+                    properties:
+                      username:
+                        type: string
+                        minLength: 1
+                      country: *a3
+                      id: *a5
+            example:
+              data:
+                - username: anna_smith88
+                  country: US
+                  id: "123"
+      responses:
+        "200":
+          description: Application response. Inspect status before reading result fields; live verification observed validation
+            and authentication errors inside HTTP 200 responses.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/BatchLookupResponse"
+                  - $ref: "#/components/schemas/Error"
+              example:
+                status: true
+                used_credits: 1
+                remaining_credits: 4999
+                expires: 1743659200
+                names:
+                  - q: anna_smith88
+                    name: Anna
+                    gender: female
+                    country: US
+                    total_names: 1234
+                    probability: 92
+                    id: "123"
+                duration: 5ms
+        "400": *a1
+        "401": *a1
+        "403": *a1
+        "404": *a4
+        "429": *a1
+  /api/remaining:
+    get:
+      tags:
+        - Quota
+      operationId: getRemainingQuota
+      summary: Retrieve remaining quota and expiration
+      description: This endpoint requires the key query parameter. Keep the request server-side and redact the full URL and
+        query string from logs; Bearer authentication was rejected with errno 94 during live verification.
+      security:
+        - apiKeyQuery: []
+      x-documentation-url: https://www.genderapi.io/docs-usage-and-quota
+      x-credit-cost: Does not perform a gender lookup.
+      responses:
+        "200":
+          description: Quota information
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/QuotaResponse"
+                  - $ref: "#/components/schemas/Error"
+              example:
+                status: true
+                remaining: 9443
+                expiresAt: 1752651601
+        "401": *a1
+        "403": *a1
+  /api/phone:
+    get:
+      tags:
+        - Phone
+      operationId: validatePhoneWithQuery
+      summary: Validate and format a phone number using query parameters
+      description: POST with Bearer authentication is preferred for secret handling.
+      security:
+        - apiKeyQuery: []
+      parameters:
+        - name: number
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: address
+          in: query
+          required: false
+          schema:
+            type: string
+      x-documentation-url: https://www.genderapi.io/docs-phone-validation-formatter-api
+      x-credit-cost: Confirm current usage accounting in account and pricing documentation.
+      responses:
+        "200":
+          description: Application response. Inspect status before reading result fields; live verification observed validation
+            and authentication errors inside HTTP 200 responses.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/PhoneResponse"
+                  - $ref: "#/components/schemas/Error"
+              example:
+                status: true
+                remaining_credits: 15709
+                expires: 0
+                duration: 18ms
+                regionCode: US
+                countryCode: 1
+                country: United States
+                national: (212) 867-5309
+                international: +1 212-867-5309
+                e164: "+12128675309"
+                isValid: true
+                isPossible: true
+                numberType: FIXED_LINE_OR_MOBILE
+        "400": *a1
+        "401": *a1
+        "403": *a1
+        "429": *a1
+    post:
+      tags:
+        - Phone
+      operationId: validatePhone
+      summary: Validate and format a phone number
+      description: "Canonical documentation: https://www.genderapi.io/docs-phone-validation-formatter-api"
+      security:
+        - bearerAuth: []
+      x-documentation-url: https://www.genderapi.io/docs-phone-validation-formatter-api
+      x-credit-cost: Confirm current usage accounting in account and pricing documentation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - number
+              properties:
+                number:
+                  type: string
+                  minLength: 1
+                address:
+                  type: string
+            example:
+              number: +1 212 867 5309
+              address: US
+      responses:
+        "200":
+          description: Application response. Inspect status before reading result fields; live verification observed validation
+            and authentication errors inside HTTP 200 responses.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: "#/components/schemas/PhoneResponse"
+                  - $ref: "#/components/schemas/Error"
+              example:
+                status: true
+                remaining_credits: 15709
+                expires: 0
+                duration: 18ms
+                e164: "+12128675309"
+                isValid: true
+        "400": *a1
+        "401": *a1
+        "403": *a1
+        "429": *a1
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Recommended server-side API-key transport.
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: key
+      description: Supported by documented GET endpoints; keep requests server-side.
+  schemas:
+    Error:
+      type: object
+      additionalProperties: true
+      required:
+        - status
+        - errno
+        - errmsg
+      properties:
+        status:
+          type: boolean
+          const: false
+        errno:
+          type: integer
+          enum:
+            - 50
+            - 90
+            - 91
+            - 92
+            - 93
+            - 94
+            - 99
+        errmsg:
+          type: string
+      example:
+        status: false
+        errno: 94
+        errmsg: invalid or missing key
+      x-error-catalog:
+        - errno: 50
+          message: access denied
+          action: Review API-key IP or referrer restrictions.
+        - errno: 90
+          message: invalid country code
+          action: Validate an ISO 3166-1 alpha-2 country code.
+        - errno: 91
+          message: required input not set
+          action: Add the endpoint's required name, email, or username.
+        - errno: 92
+          message: batch limit exceeded
+          action: Split input according to the documented endpoint limit.
+        - errno: 93
+          message: query limit reached
+          action: Pause lookups and review the account quota.
+        - errno: 94
+          message: invalid or missing key
+          action: Check server-side credential injection.
+        - errno: 99
+          message: API key has expired
+          action: Review or renew the package before retrying.
+    SingleLookupResponse:
+      allOf:
+        - type: object
+          required:
+            - status
+          properties:
+            status: &a6
+              type: boolean
+              const: true
+            used_credits: &a7
+              type: integer
+              minimum: 0
+              description: Credits consumed for processed records.
+            remaining_credits: &a8
+              type: integer
+              minimum: 0
+            expires: &a9
+              type: integer
+              description: Package expiration as a UNIX timestamp.
+            duration: &a10
+              type: string
+              examples:
+                - 4ms
+        - &a11
+          type: object
+          properties:
+            name:
+              type: string
+            q:
+              type: string
+              description: Original submitted value.
+            gender:
+              type: string
+              enum:
+                - male
+                - female
+                - "null"
+              description: Probabilistic result. An unresolved input is returned as the literal string "null", not JSON null.
+            country: *a3
+            total_names:
+              type: integer
+              minimum: 0
+            probability:
+              type: integer
+              minimum: 0
+              maximum: 100
+            id: *a5
+    BatchLookupResponse:
+      type: object
+      required:
+        - status
+        - names
+      properties:
+        status: *a6
+        used_credits: *a7
+        remaining_credits: *a8
+        expires: *a9
+        duration: *a10
+        names:
+          type: array
+          description: Contains a result for every processed input, including unresolved results with gender "null". Live
+            verification observed that a malformed entry missing the required name was omitted while valid entries were
+            processed.
+          items: *a11
+    QuotaResponse:
+      type: object
+      required:
+        - status
+        - remaining
+        - expiresAt
+      properties:
+        status:
+          type: boolean
+          const: true
+        remaining:
+          type: integer
+          minimum: 0
+        expiresAt:
+          type: integer
+          description: Expiration as a UNIX timestamp.
+    PhoneResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: boolean
+          const: true
+        remaining_credits:
+          type: integer
+          minimum: 0
+        expires:
+          type: integer
+        duration:
+          type: string
+        regionCode: *a3
+        countryCode:
+          type: integer
+        country:
+          type: string
+        national:
+          type: string
+        international:
+          type: string
+        e164:
+          type: string
+        isValid:
+          type: boolean
+        isPossible:
+          type: boolean
+        numberType:
+          type: string
+          enum:
+            - FIXED_LINE
+            - MOBILE
+            - FIXED_LINE_OR_MOBILE
+            - TOLL_FREE
+            - PREMIUM_RATE
+            - SHARED_COST
+            - VOIP
+            - PERSONAL_NUMBER
+            - PAGER
+            - UAN
+            - VOICEMAIL
+            - UNKNOWN
+        nationalSignificantNumber:
+          type: string
+        rawInput:
+          type: string
+        isGeographical:
+          type: boolean
+        areaCode:
+          type: string
+        location:
+          type: string

@@ -1,0 +1,66 @@
+generated: '2026-09-20'
+method: searched
+source: https://www.genderapi.io/price
+docs: https://www.genderapi.io/price.md
+currency: EUR
+note: >-
+  Credit-based pricing. Each plan grants a credit allowance available either as a recurring monthly
+  subscription or as a one-time "lifetime" (non-expiring) package at a slightly higher price. A free
+  tier of 200 requests per day is available with no plan. Credits are consumed per processed record.
+  Values read verbatim from the provider pricing catalog on 2026-09-20; confirm on the canonical page.
+free_tier:
+  requests_per_day: 200
+plan_count: 13
+plans:
+  - name: Free
+    price: 0
+    billing_period: none
+    included_quota: 200 requests/day
+  - name: Tester
+    credits: 5000
+    monthly_eur: 6.69
+    lifetime_eur: 8.39
+  - name: Mini
+    credits: 25000
+    monthly_eur: 15
+    lifetime_eur: 19
+  - name: Start-Up
+    credits: 50000
+    monthly_eur: 25
+    lifetime_eur: 30
+  - name: Basic
+    credits: 100000
+    monthly_eur: 40
+    lifetime_eur: 50
+  - name: Basic+
+    credits: 200000
+    monthly_eur: 50
+    lifetime_eur: 60
+  - name: Pro
+    credits: 500000
+    monthly_eur: 75
+    lifetime_eur: 90
+  - name: Advanced
+    credits: 1000000
+    monthly_eur: 90
+    lifetime_eur: 110
+  - name: Premium
+    credits: 2000000
+    monthly_eur: 130
+    lifetime_eur: 160
+  - name: Elite
+    credits: 5000000
+    monthly_eur: 200
+    lifetime_eur: 250
+  - name: Enterprise
+    credits: 10000000
+    monthly_eur: 300
+    lifetime_eur: 370
+  - name: Ultra
+    credits: 20000000
+    monthly_eur: 450
+    lifetime_eur: 560
+  - name: Ultimate
+    credits: 50000000
+    monthly_eur: 900
+    lifetime_eur: 1100

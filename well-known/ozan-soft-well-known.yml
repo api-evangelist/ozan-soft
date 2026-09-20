@@ -1,0 +1,73 @@
+generated: '2026-09-20'
+method: probed
+source: live probes of every host the record knows, 2026-09-20
+note: >-
+  No RFC 8615 /.well-known/ discovery document is served on any GenderAPI host — every
+  /.well-known/ path returns the site 404 shell. The provider DOES self-host a valid APIs.json
+  index at the domain root (/apis.json) on all three hosts, and serves /llms.txt; those are
+  recorded below and each carries its own canonical pointer (APIsJson, LLMsTxt). No WellKnown or
+  SecurityTxt pointer is emitted because no /.well-known/ path returned a real document. There is
+  no MCP host (mcp.genderapi.io does not resolve). The negative-control path returned 404, so
+  none of these hosts is a path-echoing catch-all.
+path_echo_control: passed
+hosts:
+  - host: https://www.genderapi.io
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/apis.json
+        status: 404
+      - path: /apis.json
+        status: 200
+        file: ozan-soft-apis-json.json
+      - path: /apis.yml
+        status: 404
+      - path: /llms.txt
+        status: 200
+        file: ../llms/ozan-soft-llms.txt
+      - path: /.well-known/ozan-soft-negctl-7f3ab91c.json
+        status: 404
+  - host: https://api.genderapi.io
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /apis.json
+        status: 200
+        file: ozan-soft-apis-json.json
+      - path: /llms.txt
+        status: 200
+        file: ../llms/ozan-soft-llms.txt
+      - path: /.well-known/ozan-soft-negctl-7f3ab91c.json
+        status: 404
+  - host: https://genderapi.io
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /apis.json
+        status: 200
+        file: ozan-soft-apis-json.json
+      - path: /llms.txt
+        status: 200
+        file: ../llms/ozan-soft-llms.txt
+      - path: /.well-known/ozan-soft-negctl-7f3ab91c.json
+        status: 404

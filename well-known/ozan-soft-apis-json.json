@@ -1,0 +1,88 @@
+{
+  "aid": "genderapi.io:genderapi",
+  "name": "GenderAPI",
+  "type": "Index",
+  "kind": "company",
+  "description": "Official discovery index for the GenderAPI REST API and its supporting resources.",
+  "tags": [
+    "gender",
+    "name",
+    "email",
+    "username",
+    "data enrichment"
+  ],
+  "created": "2026-09-14",
+  "modified": "2026-09-14",
+  "url": "https://www.genderapi.io/apis.json",
+  "specificationVersion": "0.23",
+  "apis": [
+    {
+      "aid": "genderapi.io:rest-api",
+      "name": "GenderAPI REST API",
+      "description": "Look up gender signals from names, email addresses, and usernames.",
+      "humanURL": "https://www.genderapi.io/api-documentation",
+      "baseURL": "https://api.genderapi.io",
+      "version": "2",
+      "tags": [
+        "REST",
+        "JSON",
+        "gender inference",
+        "data enrichment"
+      ],
+      "properties": [
+        {
+          "type": "OpenAPI",
+          "url": "https://www.genderapi.io/openapi/openapi.json",
+          "mediaType": "application/json"
+        },
+        {
+          "type": "Documentation",
+          "url": "https://www.genderapi.io/api-documentation"
+        },
+        {
+          "type": "APIReference",
+          "url": "https://www.genderapi.io/swagger/"
+        },
+        {
+          "type": "Authentication",
+          "url": "https://www.genderapi.io/docs-authentication"
+        },
+        {
+          "type": "Pricing",
+          "url": "https://www.genderapi.io/price"
+        },
+        {
+          "type": "TermsOfService",
+          "url": "https://www.genderapi.io/terms"
+        },
+        {
+          "type": "PrivacyPolicy",
+          "url": "https://www.genderapi.io/privacy-policy"
+        },
+        {
+          "type": "Support",
+          "url": "https://www.genderapi.io/contact"
+        },
+        {
+          "type": "SignUp",
+          "url": "https://app.genderapi.io/user/register"
+        },
+        {
+          "type": "PostmanCollection",
+          "url": "https://www.genderapi.io/postman/genderapi.postman_collection.json",
+          "mediaType": "application/json"
+        },
+        {
+          "type": "LLMsTxt",
+          "url": "https://www.genderapi.io/llms.txt",
+          "mediaType": "text/plain"
+        },
+        {
+          "type": "AgenticAccess",
+          "url": "https://www.genderapi.io/skill.md",
+          "mediaType": "text/markdown"
+        }
+      ]
+    }
+  ]
+}

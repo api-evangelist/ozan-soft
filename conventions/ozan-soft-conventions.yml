@@ -1,0 +1,59 @@
+generated: '2026-09-20'
+method: searched
+source: >-
+  https://www.genderapi.io/api-documentation, /docs-authentication, /docs-error-codes,
+  /docs-usage-and-quota, and openapi/ozan-soft-openapi.yml
+note: >-
+  Cross-cutting request/response semantics for GenderAPI, from the docs and the OpenAPI contract.
+authentication:
+  style: >-
+    Bearer token on POST operations (Authorization: Bearer <API key>); an api-key query parameter
+    (?key=) on the documented GET compatibility operations (/api/remaining, GET /api/phone). Keys
+    are server-side only; query-key requests must be redacted from logs.
+idempotency:
+  coverage: none
+  supported: false
+  note: >-
+    No Idempotency-Key header or replay-protection mechanism is documented. The mutating verb is
+    POST, but the POST operations are inference lookups (name/email/username/phone) that create no
+    persistent, addressable resource — there is nothing to double-create. The only side effect is
+    credit consumption (billing metering), which has no idempotency contract.
+pagination:
+  style: none
+  note: >-
+    Batch endpoints take an array of records (max 200 for names, 50 for email/username) and return
+    a result per input record in one response. There is no cursor/offset pagination.
+error_envelope:
+  shape: '{ status: boolean, errno: integer, errmsg: string }'
+  branch_on: errno
+  in_body_on_200: true
+  note: >-
+    Validation and authentication errors can be returned inside an HTTP 200 body; branch on the
+    response `status` boolean and numeric `errno`, never on HTTP status or errmsg text alone.
+  cross_link: errors/ozan-soft-problem-types.yml
+rate_limit_signaling:
+  headers: []
+  note: >-
+    No X-RateLimit-*/RateLimit-* response headers are documented. Remaining quota is exposed via
+    GET /api/remaining and via the `remaining_credits`/`used_credits`/`expires` fields on lookup
+    responses; quota exhaustion surfaces as errno 93. Credits are consumed per processed record.
+  cross_link: rate-limits/ozan-soft-rate-limits.yml
+versioning:
+  cross_link: lifecycle/ozan-soft-lifecycle.yml
+request_tracing:
+  request_id_header: null
+  note: No request-id/correlation header is documented.
+metadata:
+  note: >-
+    Country context is supplied per request via an ISO 3166-1 alpha-2 `country` field; batch
+    records may carry a caller `id` that is echoed back for reconciliation.
+reversibility:
+  grade: na
+  note: >-
+    The API is effectively read-only for the caller: gender inference, phone validation, and quota
+    retrieval create no persistent resource that could be cancelled, refunded, voided, or deleted.
+    There is no write surface to reverse. (Credit consumption is billing metering, not a reversible
+    resource operation.)
+dry_run_mode:
+  supported: na
+  note: No write surface, so a dry-run/simulation mode is not applicable.

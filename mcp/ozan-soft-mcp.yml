@@ -1,0 +1,42 @@
+generated: '2026-09-20'
+method: derived
+status: candidate
+source: openapi/ozan-soft-openapi.yml
+note: >-
+  No official or third-party MCP server is published by Ozan Soft for GenderAPI. mcp.genderapi.io
+  does not resolve, and no MCP endpoint is named in the docs, llms.txt, apis.json, or the
+  provider-published skill.md (which is an Agent Skill, not an MCP server). The tools below are a
+  DERIVED candidate mapping of the OpenAPI operations — nobody ships a runnable server, so no
+  endpoint is asserted.
+deployment:
+  mode: none
+  auth: unknown
+  verified: derived
+server:
+  name: genderapi
+  transport: http
+tools:
+  - name: infer_gender_from_name
+    description: Infer gender from one name.
+    source_operation: openapi/ozan-soft-openapi.yml#inferGenderFromName
+  - name: infer_gender_from_names
+    description: Infer gender from multiple names (batch, up to 200 records).
+    source_operation: openapi/ozan-soft-openapi.yml#inferGenderFromNames
+  - name: infer_gender_from_email
+    description: Extract a name and infer gender from one email address.
+    source_operation: openapi/ozan-soft-openapi.yml#inferGenderFromEmail
+  - name: infer_gender_from_emails
+    description: Extract names and infer gender from multiple email addresses.
+    source_operation: openapi/ozan-soft-openapi.yml#inferGenderFromEmails
+  - name: infer_gender_from_username
+    description: Extract a name and infer gender from one username.
+    source_operation: openapi/ozan-soft-openapi.yml#inferGenderFromUsername
+  - name: infer_gender_from_usernames
+    description: Extract names and infer gender from multiple usernames.
+    source_operation: openapi/ozan-soft-openapi.yml#inferGenderFromUsernames
+  - name: get_remaining_quota
+    description: Retrieve remaining quota and expiration.
+    source_operation: openapi/ozan-soft-openapi.yml#getRemainingQuota
+  - name: validate_phone
+    description: Validate and format a phone number.
+    source_operation: openapi/ozan-soft-openapi.yml#validatePhone

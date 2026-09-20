@@ -1,0 +1,45 @@
+generated: '2026-09-20'
+method: derived
+source: >-
+  openapi/ozan-soft-openapi.yml + https://www.genderapi.io/gdpr-compliance,
+  /ccpa-compliance, /docs-authentication
+note: >-
+  Cross-cutting standards the GenderAPI contract implements or the provider publishes a compliance
+  posture for. GenderAPI does NOT use RFC 9457 problem+json and declares no OAuth2/OIDC.
+standards:
+  - id: e164-phone-numbering
+    name: ITU-T E.164 phone number formatting
+    conforms: true
+    evidence: >-
+      PhoneResponse returns an `e164` field plus `national`/`international` formats and a
+      `numberType` enum (FIXED_LINE, MOBILE, TOLL_FREE, VOIP, ...) matching Google libphonenumber /
+      E.164 classification. openapi components.schemas.PhoneResponse.
+  - id: iso-3166-1-alpha-2
+    name: ISO 3166-1 alpha-2 country codes
+    conforms: true
+    evidence: >-
+      The `country` request field is constrained to ^[A-Z]{2}$ and documented as an ISO 3166-1
+      alpha-2 code used as regional context.
+  - id: rfc6750-bearer
+    name: OAuth 2.0 Bearer Token usage (RFC 6750 transport)
+    conforms: true
+    evidence: securityScheme bearerAuth (type http, scheme bearer). Note the token is a static API key, not an OAuth-issued token.
+  - id: oauth2
+    conforms: false
+  - id: openid-connect
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use a custom { status, errno, errmsg } envelope, not application/problem+json.
+  - id: gdpr
+    name: GDPR
+    conforms: true
+    evidence: Published GDPR compliance page at https://www.genderapi.io/gdpr-compliance (roles, processing categories, safeguards, data-subject information).
+  - id: ccpa
+    name: CCPA / CPRA
+    conforms: true
+    evidence: Published CCPA compliance page at https://www.genderapi.io/ccpa-compliance (California privacy disclosures and user-rights information).
+compliance_published:
+  gdpr: https://www.genderapi.io/gdpr-compliance
+  ccpa: https://www.genderapi.io/ccpa-compliance
+  privacy_policy: https://www.genderapi.io/privacy-policy

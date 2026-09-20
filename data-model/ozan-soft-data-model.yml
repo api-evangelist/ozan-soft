@@ -1,0 +1,37 @@
+generated: '2026-09-20'
+method: derived
+source: openapi/ozan-soft-openapi.yml (components.schemas)
+note: >-
+  GenderAPI exposes response-shaped value objects rather than persistent, addressable entities with
+  cross-references. There are no id-based relationships between resources (no customer/invoice-style
+  graph); the only linking field is a caller-supplied `id` echoed back on batch records for the
+  consumer's own reconciliation. Relationships are therefore empty by design, not by omission.
+entities:
+  - name: SingleLookupResponse
+    kind: value-object
+    description: One gender-inference result (name/email/username input).
+    key_fields: [status, name, q, gender, country, total_names, probability, id, used_credits, remaining_credits, expires, duration]
+  - name: BatchLookupResponse
+    kind: value-object
+    description: A batch result containing one SingleLookupResponse-shaped entry per submitted record.
+    key_fields: [status, names, used_credits, remaining_credits, expires, duration]
+  - name: PhoneResponse
+    kind: value-object
+    description: Phone validation/formatting result (libphonenumber-style fields).
+    key_fields: [status, isValid, isPossible, e164, national, international, regionCode, countryCode, numberType]
+  - name: QuotaResponse
+    kind: value-object
+    description: Remaining quota and package expiration.
+    key_fields: [status, remaining, expiresAt]
+  - name: Error
+    kind: value-object
+    description: Provider error envelope keyed on numeric errno.
+    key_fields: [status, errno, errmsg]
+relationships: []
+identifiers:
+  - field: id
+    on:
+      - BatchLookupResponse.names[] entries
+      - batch request records
+    type: caller-supplied
+    note: Opaque string or integer chosen by the caller and echoed back for reconciliation.

@@ -1,0 +1,40 @@
+generated: '2026-09-20'
+method: searched
+provider: Ozan Soft
+providerId: ozan-soft
+source: https://www.genderapi.io/price
+docs: https://www.genderapi.io/docs-usage-and-quota
+description: >-
+  GenderAPI enforces usage through a credit/quota model rather than a requests-per-second throttle.
+  A free tier allows 200 requests per day; paid plans grant a fixed credit allowance consumed per
+  processed record. Quota exhaustion returns errno 93 ("query limit reached"). No X-RateLimit-* or
+  RateLimit-* response headers are documented; remaining quota is exposed via GET /api/remaining and
+  via the remaining_credits/used_credits/expires fields on lookup responses. Documented batch-size
+  caps bound per-request volume.
+headers:
+  ratelimit_headers: []
+  quota_response_fields: [remaining, remaining_credits, used_credits, expires, expiresAt]
+responseCodes:
+  quota_exhausted: 429
+  quota_errno: 93
+limits:
+  - name: Free tier daily cap
+    scope: per-account
+    metric: requests_per_day
+    limit: 200
+    timeFrame: day
+  - name: Plan credit allowance
+    scope: per-account
+    metric: credits
+    limit_range: 5000-50000000
+    note: Per-plan allowance (Tester 5,000 through Ultimate 50,000,000), consumed per processed record.
+  - name: Name batch size
+    scope: per-request
+    metric: records
+    limit: 200
+    note: Max records per /api/name/multi/country request.
+  - name: Email/username batch size
+    scope: per-request
+    metric: records
+    limit: 50
+    note: Max records per /api/email/multi/country and /api/username/multi/country request.

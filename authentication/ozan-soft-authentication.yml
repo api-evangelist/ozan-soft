@@ -1,0 +1,23 @@
+generated: '2026-09-20'
+method: derived
+source: openapi/ozan-soft-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - query
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Recommended server-side API-key transport.
+  sources:
+  - openapi/ozan-soft-openapi.yml
+- name: apiKeyQuery
+  type: apiKey
+  in: query
+  parameter: key
+  description: Supported by documented GET endpoints; keep requests server-side.
+  sources:
+  - openapi/ozan-soft-openapi.yml

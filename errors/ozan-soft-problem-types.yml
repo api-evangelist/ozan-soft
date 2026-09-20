@@ -1,0 +1,50 @@
+generated: '2026-09-20'
+method: derived
+source: openapi/ozan-soft-openapi.yml (components.schemas.Error.x-error-catalog)
+docs: https://www.genderapi.io/docs-error-codes
+format: custom
+note: >-
+  GenderAPI does NOT use RFC 9457 problem+json. Errors are returned in the provider's own envelope
+  { status: false, errno: <int>, errmsg: <string> } and — per the spec and live verification —
+  frequently arrive inside an HTTP 200 body. Consumers must branch on the stable numeric `errno`,
+  not on `errmsg` text or on HTTP status. Gender-inference handlers additionally map an
+  authentication rejection to HTTP 404 with an Error body (backend compatibility behavior).
+envelope:
+  status_field: status
+  code_field: errno
+  message_field: errmsg
+problems:
+  - errno: 50
+    title: access denied
+    remediation: Review API-key IP or referrer restrictions.
+  - errno: 90
+    title: invalid country code
+    remediation: Validate an ISO 3166-1 alpha-2 country code.
+  - errno: 91
+    title: required input not set
+    remediation: Add the endpoint's required name, email, or username.
+  - errno: 92
+    title: batch limit exceeded
+    remediation: Split input according to the documented endpoint limit (200 for names, 50 for email/username).
+  - errno: 93
+    title: query limit reached
+    remediation: Pause lookups and review the account quota.
+  - errno: 94
+    title: invalid or missing key
+    remediation: Check server-side credential injection.
+  - errno: 99
+    title: API key has expired
+    remediation: Review or renew the package before retrying.
+http_status_responses:
+  - status: 400
+    description: Request rejected. Branch on errno rather than errmsg text.
+  - status: 401
+    description: Authentication error (Error body).
+  - status: 403
+    description: Access rejected (Error body).
+  - status: 404
+    description: >-
+      Authentication rejected by a gender-inference handler. Current backend compatibility
+      behavior uses HTTP 404 with an Error body for this branch.
+  - status: 429
+    description: Rate/quota exhaustion (Error body).
