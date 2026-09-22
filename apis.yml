@@ -7,6 +7,15 @@ created: '2026-09-19'
 modified: '2026-09-20'
 specificationVersion: '0.21'
 tags:
+  - Data Enrichment
+  - Gender Detection
+  - Name Analysis
+  - Demographics
+  - Identity
+  - Marketing Data
+  - Developer API
+  - Phone Validation
+tags_raw:
   - data-enrichment
   - gender-detection
   - name-analysis
@@ -24,6 +33,15 @@ apis:
     humanURL: https://www.genderapi.io/api-documentation
     baseURL: https://api.genderapi.io
     tags:
+      - Data Enrichment
+      - Gender Detection
+      - Name Analysis
+      - Demographics
+      - Identity
+      - Marketing Data
+      - Developer API
+      - Phone Validation
+    tags_raw:
       - data-enrichment
       - gender-detection
       - name-analysis
