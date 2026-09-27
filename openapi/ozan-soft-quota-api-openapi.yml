@@ -1,0 +1,146 @@
+openapi: 3.2.0
+info:
+  title: Ozan Soft Quota API
+  version: 1.0.0
+  contact:
+    url: https://www.genderapi.io/contact
+  termsOfService: https://www.genderapi.io/terms
+  description: 'Operations tagged Quota across 2 of this provider''s published API definitions: ozan-soft-openapi.json, ozan-soft-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.genderapi.io
+  description: Production API
+tags:
+- name: Quota
+paths:
+  /api/remaining:
+    get:
+      tags:
+      - Quota
+      operationId: getRemainingQuota
+      summary: Retrieve remaining quota and expiration
+      description: This endpoint requires the key query parameter. Keep the request server-side and redact the full URL and query string from logs; Bearer authentication was rejected with errno 94 during live verification.
+      security:
+      - apiKeyQuery: []
+      x-documentation-url: https://www.genderapi.io/docs-usage-and-quota
+      x-credit-cost: Does not perform a gender lookup.
+      responses:
+        '200':
+          description: Quota information
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/QuotaResponse'
+                - $ref: '#/components/schemas/Error'
+              example:
+                status: true
+                remaining: 9443
+                expiresAt: 1752651601
+        '401':
+          description: Request rejected. Branch on errno rather than errmsg text.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Request rejected. Branch on errno rather than errmsg text.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    servers:
+    - url: https://api.genderapi.io
+      description: Production API
+components:
+  schemas:
+    QuotaResponse:
+      type: object
+      required:
+      - status
+      - remaining
+      - expiresAt
+      properties:
+        status:
+          type: boolean
+          const: true
+        remaining:
+          type: integer
+          minimum: 0
+        expiresAt:
+          type: integer
+          description: Expiration as a UNIX timestamp.
+    Error:
+      type: object
+      additionalProperties: true
+      required:
+      - status
+      - errno
+      - errmsg
+      properties:
+        status:
+          type: boolean
+          const: false
+        errno:
+          type: integer
+          enum:
+          - 50
+          - 90
+          - 91
+          - 92
+          - 93
+          - 94
+          - 99
+        errmsg:
+          type: string
+      example:
+        status: false
+        errno: 94
+        errmsg: invalid or missing key
+      x-error-catalog:
+      - errno: 50
+        message: access denied
+        action: Review API-key IP or referrer restrictions.
+      - errno: 90
+        message: invalid country code
+        action: Validate an ISO 3166-1 alpha-2 country code.
+      - errno: 91
+        message: required input not set
+        action: Add the endpoint's required name, email, or username.
+      - errno: 92
+        message: batch limit exceeded
+        action: Split input according to the documented endpoint limit.
+      - errno: 93
+        message: query limit reached
+        action: Pause lookups and review the account quota.
+      - errno: 94
+        message: invalid or missing key
+        action: Check server-side credential injection.
+      - errno: 99
+        message: API key has expired
+        action: Review or renew the package before retrying.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Recommended server-side API-key transport.
+    apiKeyQuery:
+      type: apiKey
+      in: query
+      name: key
+      description: Supported by documented GET endpoints; keep requests server-side.
+x-refined-from:
+- ozan-soft-openapi.json
+- ozan-soft-openapi.yml
+x-lifecycle-policy:
+  approvedAt: '2026-09-15'
+  canonicalTransport: Bearer authentication on POST operations; query-key on documented GET compatibility operations.
+  compatibility: Existing legacy GET, authentication transports, JSONP or alternate response shapes, HTTP error mappings, and errno values remain operational until measured, announced, and migrated.
+  breakingChange: Removing or changing an accepted request transport, operation, response shape, field type, HTTP/application-error mapping, or errno value is a breaking change.
+  minimumNoticeMonths: 6
+  criticalEnterpriseNoticeMonths: 12
+  noticeChannels:
+  - developer documentation
+  - account email
+  sunsetSignaling:
+  - documentation deprecation notice
+  - Sunset HTTP header where technically applicable

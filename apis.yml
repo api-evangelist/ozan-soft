@@ -25,46 +25,54 @@ tags_raw:
   - developer-api
   - phone-validation
 apis:
-  - name: GenderAPI.io
-    description: >-
-      REST + JSON API that infers gender from first/full names, email addresses, and social usernames, with
-      bulk/multi-country requests, phone validation, and credit/quota endpoints. Supports Bearer token and API-key query
-      authentication.
-    humanURL: https://www.genderapi.io/api-documentation
-    baseURL: https://api.genderapi.io
-    tags:
-      - Data Enrichment
-      - Gender Detection
-      - Name Analysis
-      - Demographics
-      - Identity
-      - Marketing Data
-      - Developer API
-      - Phone Validation
-    tags_raw:
-      - data-enrichment
-      - gender-detection
-      - name-analysis
-      - demographics
-      - identity
-      - marketing-data
-      - developer-api
-      - phone-validation
-    properties:
-      - type: OpenAPI
-        url: openapi/ozan-soft-openapi.yml
-      - type: OpenAPI
-        name: OpenAPI (provider-hosted, JSON)
-        url: https://www.genderapi.io/openapi/openapi.json
-      - type: OpenAPI
-        name: OpenAPI (provider-hosted, YAML)
-        url: https://www.genderapi.io/openapi/openapi.yaml
-      - type: PostmanCollection
-        url: https://www.genderapi.io/postman/genderapi.postman_collection.json
-      - type: Documentation
-        url: https://www.genderapi.io/api-documentation
-      - type: APIReference
-        url: https://www.genderapi.io/swagger/
+- aid: ozan-soft:ozan-soft-gender-inference-api
+  name: Ozan Soft Gender inference API
+  description: The Gender inference API from Ozan Soft — 6 operation(s) for gender inference.
+  humanURL: https://www.genderapi.io/api-documentation
+  baseURL: https://api.genderapi.io
+  tags:
+  - Gender inference
+  properties:
+  - type: OpenAPI
+    url: openapi/ozan-soft-gender-inference-api-openapi.yml
+  - type: PostmanCollection
+    url: https://www.genderapi.io/postman/genderapi.postman_collection.json
+  - type: Documentation
+    url: https://www.genderapi.io/api-documentation
+  - type: APIReference
+    url: https://www.genderapi.io/swagger/
+- aid: ozan-soft:ozan-soft-phone-api
+  name: Ozan Soft Phone API
+  description: The Phone API from Ozan Soft — 1 operation(s) for phone.
+  humanURL: https://www.genderapi.io/api-documentation
+  baseURL: https://api.genderapi.io
+  tags:
+  - Phone
+  properties:
+  - type: OpenAPI
+    url: openapi/ozan-soft-phone-api-openapi.yml
+  - type: PostmanCollection
+    url: https://www.genderapi.io/postman/genderapi.postman_collection.json
+  - type: Documentation
+    url: https://www.genderapi.io/api-documentation
+  - type: APIReference
+    url: https://www.genderapi.io/swagger/
+- aid: ozan-soft:ozan-soft-quota-api
+  name: Ozan Soft Quota API
+  description: The Quota API from Ozan Soft — 1 operation(s) for quota.
+  humanURL: https://www.genderapi.io/api-documentation
+  baseURL: https://api.genderapi.io
+  tags:
+  - Quota
+  properties:
+  - type: OpenAPI
+    url: openapi/ozan-soft-quota-api-openapi.yml
+  - type: PostmanCollection
+    url: https://www.genderapi.io/postman/genderapi.postman_collection.json
+  - type: Documentation
+    url: https://www.genderapi.io/api-documentation
+  - type: APIReference
+    url: https://www.genderapi.io/swagger/
 maintainers:
   - FN: Ozan Soft
     url: https://www.genderapi.io/
