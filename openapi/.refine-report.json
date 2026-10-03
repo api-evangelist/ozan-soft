@@ -1,30 +1,27 @@
 {
   "provider": "ozan-soft",
   "sources": [
-    "_original/ozan-soft-openapi.json",
-    "ozan-soft-openapi.yml"
+    "_original/ozan-soft-openapi.json"
   ],
   "outputs": [
     "ozan-soft-gender-inference-api-openapi.yml",
     "ozan-soft-phone-api-openapi.yml",
     "ozan-soft-quota-api-openapi.yml"
   ],
-  "archived": [
-    "archived openapi/ozan-soft-openapi.yml"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
-    "1 archived document(s) dropped as subsets of other archived documents",
+    "2 archived document(s) dropped as subsets of other archived documents",
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "ozan-soft-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "ozan-soft-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tag 'Gender inference' spans 2 source specs (ozan-soft-openapi.json, ozan-soft-openapi.yml): per-path servers applied",
-    "tag 'Phone' spans 2 source specs (ozan-soft-openapi.json, ozan-soft-openapi.yml): per-path servers applied",
-    "tag 'Quota' spans 2 source specs (ozan-soft-openapi.json, ozan-soft-openapi.yml): per-path servers applied",
-    "apis.yml register: written (+3 apis, 3 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
-    "_original/ozan-soft-openapi.yaml: archived document superseded by a larger archived document"
+    "_original/ozan-soft-openapi.yml: archived document superseded by a larger archived document",
+    "_original/ozan-soft-openapi.yaml: archived document superseded by a larger archived document",
+    "ozan-soft-gender-inference-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ozan-soft-phone-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ozan-soft-quota-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }

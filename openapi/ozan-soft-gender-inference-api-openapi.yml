@@ -1,11 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Ozan Soft Gender inference API
+  title: GenderAPI Public Gender inference API
   version: 1.0.0
+  summary: Gender inference and phone validation endpoints.
+  description: API-owner-approved contract derived from the public English documentation and verified backend handlers. Gender values are probabilistic inferences, not verified identity. Publication remains controlled by the separate GEO release gate.
+  termsOfService: https://www.genderapi.io/terms
   contact:
     url: https://www.genderapi.io/contact
-  termsOfService: https://www.genderapi.io/terms
-  description: 'Operations tagged Gender inference across 2 of this provider''s published API definitions: ozan-soft-openapi.json, ozan-soft-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.genderapi.io
   description: Production API
@@ -100,9 +101,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-    servers:
-    - url: https://api.genderapi.io
-      description: Production API
   /api/name/multi/country:
     post:
       tags:
@@ -210,9 +208,6 @@ paths:
         observedAt: '2026-09-14'
         result: A 200-record request returned all 200 results with used_credits 200. A 201-record request returned HTTP 200 with status false and errno 92.
         partialProcessing: A mixed request containing one valid record and one record without the required name returned status true, one result, and used_credits 1. An empty-string name was processed and returned gender "null".
-    servers:
-    - url: https://api.genderapi.io
-      description: Production API
   /api/email:
     post:
       tags:
@@ -300,9 +295,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-    servers:
-    - url: https://api.genderapi.io
-      description: Production API
   /api/email/multi/country:
     post:
       tags:
@@ -406,9 +398,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-    servers:
-    - url: https://api.genderapi.io
-      description: Production API
   /api/username:
     post:
       tags:
@@ -499,9 +488,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-    servers:
-    - url: https://api.genderapi.io
-      description: Production API
   /api/username/multi/country:
     post:
       tags:
@@ -605,11 +591,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-    servers:
-    - url: https://api.genderapi.io
-      description: Production API
 components:
   schemas:
+    Error:
+      type: object
+      additionalProperties: true
+      required:
+      - status
+      - errno
+      - errmsg
+      properties:
+        status:
+          type: boolean
+          const: false
+        errno:
+          type: integer
+          enum:
+          - 50
+          - 90
+          - 91
+          - 92
+          - 93
+          - 94
+          - 99
+        errmsg:
+          type: string
+      example:
+        status: false
+        errno: 94
+        errmsg: invalid or missing key
+      x-error-catalog:
+      - errno: 50
+        message: access denied
+        action: Review API-key IP or referrer restrictions.
+      - errno: 90
+        message: invalid country code
+        action: Validate an ISO 3166-1 alpha-2 country code.
+      - errno: 91
+        message: required input not set
+        action: Add the endpoint's required name, email, or username.
+      - errno: 92
+        message: batch limit exceeded
+        action: Split input according to the documented endpoint limit.
+      - errno: 93
+        message: query limit reached
+        action: Pause lookups and review the account quota.
+      - errno: 94
+        message: invalid or missing key
+        action: Check server-side credential injection.
+      - errno: 99
+        message: API key has expired
+        action: Review or renew the package before retrying.
     BatchLookupResponse:
       type: object
       required:
@@ -724,55 +756,6 @@ components:
             - type: string
             - type: integer
             description: Caller record identifier.
-    Error:
-      type: object
-      additionalProperties: true
-      required:
-      - status
-      - errno
-      - errmsg
-      properties:
-        status:
-          type: boolean
-          const: false
-        errno:
-          type: integer
-          enum:
-          - 50
-          - 90
-          - 91
-          - 92
-          - 93
-          - 94
-          - 99
-        errmsg:
-          type: string
-      example:
-        status: false
-        errno: 94
-        errmsg: invalid or missing key
-      x-error-catalog:
-      - errno: 50
-        message: access denied
-        action: Review API-key IP or referrer restrictions.
-      - errno: 90
-        message: invalid country code
-        action: Validate an ISO 3166-1 alpha-2 country code.
-      - errno: 91
-        message: required input not set
-        action: Add the endpoint's required name, email, or username.
-      - errno: 92
-        message: batch limit exceeded
-        action: Split input according to the documented endpoint limit.
-      - errno: 93
-        message: query limit reached
-        action: Pause lookups and review the account quota.
-      - errno: 94
-        message: invalid or missing key
-        action: Check server-side credential injection.
-      - errno: 99
-        message: API key has expired
-        action: Review or renew the package before retrying.
   securitySchemes:
     bearerAuth:
       type: http
@@ -783,9 +766,6 @@ components:
       in: query
       name: key
       description: Supported by documented GET endpoints; keep requests server-side.
-x-refined-from:
-- ozan-soft-openapi.json
-- ozan-soft-openapi.yml
 x-lifecycle-policy:
   approvedAt: '2026-09-15'
   canonicalTransport: Bearer authentication on POST operations; query-key on documented GET compatibility operations.
