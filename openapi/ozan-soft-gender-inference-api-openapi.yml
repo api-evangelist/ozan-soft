@@ -593,6 +593,61 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    SingleLookupResponse:
+      allOf:
+      - type: object
+        required:
+        - status
+        properties:
+          status:
+            type: boolean
+            const: true
+          used_credits:
+            type: integer
+            minimum: 0
+            description: Credits consumed for processed records.
+          remaining_credits:
+            type: integer
+            minimum: 0
+          expires:
+            type: integer
+            description: Package expiration as a UNIX timestamp.
+          duration:
+            type: string
+            examples:
+            - 4ms
+      - type: object
+        properties:
+          name:
+            type: string
+          q:
+            type: string
+            description: Original submitted value.
+          gender:
+            type: string
+            enum:
+            - male
+            - female
+            - 'null'
+            description: Probabilistic result. An unresolved input is returned as the literal string "null", not JSON null.
+          country:
+            type: string
+            pattern: ^[A-Z]{2}$
+            description: ISO 3166-1 alpha-2 country code used as regional context.
+            examples:
+            - US
+          total_names:
+            type: integer
+            minimum: 0
+          probability:
+            type: integer
+            minimum: 0
+            maximum: 100
+          id:
+            oneOf:
+            - type: string
+            - type: integer
+            description: Caller record identifier.
     Error:
       type: object
       additionalProperties: true
@@ -701,61 +756,6 @@ components:
                 - type: string
                 - type: integer
                 description: Caller record identifier.
-    SingleLookupResponse:
-      allOf:
-      - type: object
-        required:
-        - status
-        properties:
-          status:
-            type: boolean
-            const: true
-          used_credits:
-            type: integer
-            minimum: 0
-            description: Credits consumed for processed records.
-          remaining_credits:
-            type: integer
-            minimum: 0
-          expires:
-            type: integer
-            description: Package expiration as a UNIX timestamp.
-          duration:
-            type: string
-            examples:
-            - 4ms
-      - type: object
-        properties:
-          name:
-            type: string
-          q:
-            type: string
-            description: Original submitted value.
-          gender:
-            type: string
-            enum:
-            - male
-            - female
-            - 'null'
-            description: Probabilistic result. An unresolved input is returned as the literal string "null", not JSON null.
-          country:
-            type: string
-            pattern: ^[A-Z]{2}$
-            description: ISO 3166-1 alpha-2 country code used as regional context.
-            examples:
-            - US
-          total_names:
-            type: integer
-            minimum: 0
-          probability:
-            type: integer
-            minimum: 0
-            maximum: 100
-          id:
-            oneOf:
-            - type: string
-            - type: integer
-            description: Caller record identifier.
   securitySchemes:
     bearerAuth:
       type: http
