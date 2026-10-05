@@ -1,0 +1,12 @@
+{
+ "url": "https://www.genderapi.io/openapi/openapi.json",
+ "requested_url": "https://www.genderapi.io/openapi/openapi.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 51312,
+ "sha256": "800e7a9d2a0e285f9fb5851ee7f9e453c9e0fe14dbff280cf1e7837f4e09af01",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
