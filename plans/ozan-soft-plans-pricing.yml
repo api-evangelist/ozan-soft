@@ -64,3 +64,88 @@ plans:
     credits: 50000000
     monthly_eur: 900
     lifetime_eur: 1100
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  units: []
+  plans:
+  - name: Free
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Tester
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Mini
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Start-Up
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Basic
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Basic+
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Pro
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Advanced
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Premium
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Elite
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Ultra
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Ultimate
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
