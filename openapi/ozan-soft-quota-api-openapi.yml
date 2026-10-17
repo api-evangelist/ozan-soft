@@ -51,6 +51,22 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    QuotaResponse:
+      type: object
+      required:
+      - status
+      - remaining
+      - expiresAt
+      properties:
+        status:
+          type: boolean
+          const: true
+        remaining:
+          type: integer
+          minimum: 0
+        expiresAt:
+          type: integer
+          description: Expiration as a UNIX timestamp.
     Error:
       type: object
       additionalProperties: true
@@ -100,22 +116,6 @@ components:
       - errno: 99
         message: API key has expired
         action: Review or renew the package before retrying.
-    QuotaResponse:
-      type: object
-      required:
-      - status
-      - remaining
-      - expiresAt
-      properties:
-        status:
-          type: boolean
-          const: true
-        remaining:
-          type: integer
-          minimum: 0
-        expiresAt:
-          type: integer
-          description: Expiration as a UNIX timestamp.
   securitySchemes:
     bearerAuth:
       type: http

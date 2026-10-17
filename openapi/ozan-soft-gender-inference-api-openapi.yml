@@ -648,55 +648,6 @@ components:
             - type: string
             - type: integer
             description: Caller record identifier.
-    Error:
-      type: object
-      additionalProperties: true
-      required:
-      - status
-      - errno
-      - errmsg
-      properties:
-        status:
-          type: boolean
-          const: false
-        errno:
-          type: integer
-          enum:
-          - 50
-          - 90
-          - 91
-          - 92
-          - 93
-          - 94
-          - 99
-        errmsg:
-          type: string
-      example:
-        status: false
-        errno: 94
-        errmsg: invalid or missing key
-      x-error-catalog:
-      - errno: 50
-        message: access denied
-        action: Review API-key IP or referrer restrictions.
-      - errno: 90
-        message: invalid country code
-        action: Validate an ISO 3166-1 alpha-2 country code.
-      - errno: 91
-        message: required input not set
-        action: Add the endpoint's required name, email, or username.
-      - errno: 92
-        message: batch limit exceeded
-        action: Split input according to the documented endpoint limit.
-      - errno: 93
-        message: query limit reached
-        action: Pause lookups and review the account quota.
-      - errno: 94
-        message: invalid or missing key
-        action: Check server-side credential injection.
-      - errno: 99
-        message: API key has expired
-        action: Review or renew the package before retrying.
     BatchLookupResponse:
       type: object
       required:
@@ -756,6 +707,55 @@ components:
                 - type: string
                 - type: integer
                 description: Caller record identifier.
+    Error:
+      type: object
+      additionalProperties: true
+      required:
+      - status
+      - errno
+      - errmsg
+      properties:
+        status:
+          type: boolean
+          const: false
+        errno:
+          type: integer
+          enum:
+          - 50
+          - 90
+          - 91
+          - 92
+          - 93
+          - 94
+          - 99
+        errmsg:
+          type: string
+      example:
+        status: false
+        errno: 94
+        errmsg: invalid or missing key
+      x-error-catalog:
+      - errno: 50
+        message: access denied
+        action: Review API-key IP or referrer restrictions.
+      - errno: 90
+        message: invalid country code
+        action: Validate an ISO 3166-1 alpha-2 country code.
+      - errno: 91
+        message: required input not set
+        action: Add the endpoint's required name, email, or username.
+      - errno: 92
+        message: batch limit exceeded
+        action: Split input according to the documented endpoint limit.
+      - errno: 93
+        message: query limit reached
+        action: Pause lookups and review the account quota.
+      - errno: 94
+        message: invalid or missing key
+        action: Check server-side credential injection.
+      - errno: 99
+        message: API key has expired
+        action: Review or renew the package before retrying.
   securitySchemes:
     bearerAuth:
       type: http
