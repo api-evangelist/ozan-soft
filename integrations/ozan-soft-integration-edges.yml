@@ -1,9 +1,19 @@
-generated: '2026-10-15'
+generated: '2026-10-20'
 method: searched
-checked:
-- shopify/integrations/shopify-integration-edges.yml
 source:
 - shopify/integrations/shopify-integration-edges.yml
+- https://zapier.com/apps/ozan-soft/integrations
+- https://n8n.io/integrations/ozan-soft/
+- https://composio.dev/toolkits/ozan-soft
+- https://monid.ai/tools/ozan-soft
+checked:
+- shopify/integrations/shopify-integration-edges.yml
+- https://composio.dev/toolkits/ozan-soft
+- https://monid.ai/tools/ozan-soft
+- https://n8n.io/integrations/ozan-soft/
+- https://zapier.com/apps/ozan-soft/integrations
+summary: null
+marketplace_apps: []
 edges:
 - partner_name: Shopify (own)
   partner: shopify
@@ -24,3 +34,4 @@ edges:
   detected_by: mirror-platform-listings.py
   publisher_verified:
   - Built for Shopify
+templates: []
