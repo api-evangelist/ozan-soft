@@ -779,3 +779,9 @@ x-lifecycle-policy:
   sunsetSignaling:
   - documentation deprecation notice
   - Sunset HTTP header where technically applicable
+x-provenance:
+  method: harvested
+  publisher: Ozan Soft
+  source: https://www.genderapi.io/openapi/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
