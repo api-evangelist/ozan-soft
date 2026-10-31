@@ -1,5 +1,4 @@
-# ozan-soft
-Independent software company based in Ankara, Türkiye, whose flagship developer product is GenderAPI.io — a REST API for gender detection and name/email/username analysis, phone validation, and demographic data enrichment.
+# Ozan Soft
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,3 +63,121 @@ Independent software company based in Ankara, Türkiye, whose flagship developer
 >
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
+
+Independent software company based in Ankara, Türkiye, whose flagship developer product is GenderAPI.io — a REST API for gender detection and name/email/username analysis, phone validation, and demographic data enrichment.
+
+**Areas:** Data Enrichment · Gender Detection · Name Analysis · Demographics · Identity · Marketing Data · Developer API · Phone Validation
+
+## Ozan Soft on APIs.io
+
+Everything profiled for Ozan Soft is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/ozan-soft/](https://apis.io/providers/ozan-soft/)** — or go straight to one of the APIs or properties below.
+
+### APIs (3)
+
+- [Ozan Soft Gender inference API](https://apis.io/apis/ozan-soft/ozan-soft-gender-inference-api/) — The Gender inference API from Ozan Soft — 6 operation(s) for gender inference.
+- [Ozan Soft Phone API](https://apis.io/apis/ozan-soft/ozan-soft-phone-api/) — The Phone API from Ozan Soft — 1 operation(s) for phone.
+- [Ozan Soft Quota API](https://apis.io/apis/ozan-soft/ozan-soft-quota-api/) — The Quota API from Ozan Soft — 1 operation(s) for quota.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [genderapi](https://apis.io/servers/ozan-soft/genderapi/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Ozan Soft Openapi Overlay](https://apis.io/overlays/ozan-soft/ozan-soft-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Ozan Soft Authentication](https://apis.io/security/ozan-soft/ozan-soft-authentication/)
+- [Ozan Soft Domain Security](https://apis.io/security/ozan-soft/ozan-soft-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Ozan Soft Plans Pricing](https://apis.io/plans/ozan-soft/ozan-soft-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Ozan Soft Rate Limits](https://apis.io/rate-limits/ozan-soft/ozan-soft-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.genderapi.io/)
+- [Pricing](https://www.genderapi.io/price)
+- [Sign up](https://app.genderapi.io/user/register)
+- [Support](https://www.genderapi.io/contact)
+- [Blog](https://www.genderapi.io/blog)
+- [Compliance](https://www.genderapi.io/gdpr-compliance)
+- [Terms of service](https://www.genderapi.io/terms)
+- [Privacy policy](https://www.genderapi.io/privacy-policy)
+- [GitHub](https://github.com/GenderAPI)
+
+## API Evangelist rating
+
+**Kin Score 55.7** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 34.7 |
+| Contract governance | 4.5 |
+| Operational transparency | 44.7 |
+| Developer ergonomics | 73.8 |
+| Access clarity | 84.2 |
+
+**Agent readiness 33.8** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | yes |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 37.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/ozan-soft/](https://apis.io/providers/ozan-soft/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Ozan Soft: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/ozan-soft/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
